@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+	<Fullscreen />
+	<Resolution>800x600</Resolution>
+	<BitsPerPixel>32</BitsPerPixel>
+	<GameSpeed>25</GameSpeed>
+	<FrameSkip>5</FrameSkip>
+</Settings>

@@ -1,0 +1,98 @@
+<17/11/2014> Version 1.3.11:
+- Several functions have been renamed or removed.
+- Added a templated functions/constructors that automatically handle most parameter types.
+- Changed the way comment tags are handled. Added support for multiline comments. Note: Parsing a file with comment tags and then saving it to a file will result in loss of the comment tag data.
+- The tag browsing process has been reviewed. Added a public function that resets the tag browsing and one that clears the stored tags.
+- Implemented comment support for tags.
+- Declared a namespace with Trigger constants.
+- Got rid of all the reference declarations.
+- Added == and != operators for the attribute class.
+- Added == and != operators for the tag class.
+- XMLReader::File::Build() now includes the declaration tag.
+- Added support for declaration tags to XMLReader::File::Build().
+- Rewrote function XMLReader::Tag::ExtendText(). The function now adds a newline only before adding additional text.
+
+<03/05/2012> Version 1.2.10:
+- Removed functions for string manipulation that are not directly used in the library.
+
+<02/12/2012> Version 1.2.9:
+- Fixed a bug that went through which didn't allow multiple attributes on a tag.
+- Fixed a bug that allowed adding text to close and selfclose tags.
+
+<01/12/2011> Version 1.2.8:
+- Function XMLReader::File::Parse() refactored. It is now stricter in some things and more flexible in other.
+- Fixed a few bugs in XMLReader::File::Build() that messed up the file output. It should now work well enough for most XML structures.
+
+<23/10/2011> Version 1.1.7:
+- Fixed a bug where empty attributes were found and added to a tag during parsing.
+
+<10/09/2011> Version 1.1.6:
+- The following definitions have been changed:
+	File.h:
+		void Build(string TargetLocation = "");
+- Function XMLReader::File::Save() has been removed.
+- Function XMLReader::Tag::Build() has been removed.
+- Function XMLReader::Attribute::Build() has been removed.
+- All Build() functions are now included in XMLReader::File::Build(), which also has a new optional argument. Read documentation for use instructions.
+
+<07/09/2011> Version 1.1.5:
+- The following definitions have been changed:
+	File.h:
+		File(string Location, string Root = "");
+		int Parse(string &Location, string Root = "");
+		void Save(string Location);
+- XMLReader::File::Parse() has been reviewed. Some bugs fixed. The parser is now more flexible.
+- Added support for XML declaration. Trigger value for a declaration tag is 3, and the proper syntax: <?xml version="1.0" encoding="UTF-8"?>
+- Minor bug fixes in XMLReader::File::Build() function.
+- Argument Type of XMLReader::File::Parse() will be referred to as Root from now on.
+		
+<03/09/2011> Version 1.0.4:
+- Most argument types have been reviewed. The following method definitions have been altered as shown below:
+	Attribute.h:
+		Attribute(string Name, string Value);
+		void Create(string &Name, string &Value);
+	Tag.h
+		Tag(string Name, int Trigger);
+        void Create(string &Name, int &Trigger);
+		void AddAttribute(XMLReader::Attribute &Attribute);
+		string &GetName();
+        int &GetTrigger();
+        string &GetText();
+	File.h
+		File(string Location, string Type = "xml");
+		void AddTag(XMLReader::Tag &Tag);
+	Functions.h
+		Type String2(const string &String, char Seperator = '\0', int SubstringNumber = 0);
+- All Build() functions have been altered to properly output the XML structure based on the current class structure.
+- XMLReader::File, XMLReader::Tag, XMLReader::Attribute destructors have all been altered to properly clear up after use.
+- New protected function void XMLReader::File::Reset(). XMLReader::File::HasTags() now calls XMLReader::File::Reset() when it returns false. This means it will reset when it reaches the last tag.
+- New protected function void XMLReader::Tag::Reset(). XMLReader::Tag::HasAttributes() now calls XMLReader::Tag::Reset() when it returns false. This means it will reset when it reaches the last attribute.
+- New function void XMLReader::File::Clear().
+- New function void XMLReader::Tag::Clear().
+- New function void XMLReader::Attribute::Clear().
+- New function int XMLReader::FindTotalOf(char Seperator, string &String).
+- New function int XMLReader::FindNthOf(int &Occurence, char Character, string &String).
+- New function void XMLReader::File::Save(string &Location).
+
+<01/09/2011> 1.0.3:
+- All variable and namespace names capitalized.
+- XMLReader::File architecture rewritten. Simpler setup and a lot of tweaks.
+- Added String2<type> function as a tool. It converts strings to a selected data type.
+- Most return functions now return references to the objects which should make the library run faster.
+- Renamed header definitions to prevent conflicts.
+- Changed some console output to be reported as errors.
+- Added new argument when parsing an XML file which defines the "type" of the xml structure. The first and last tag of the file should be of that type, in the following manner:
+
+<Type>
+	...
+</Type>
+
+The type argument is optional and default value for it is "xml".
+
+<10/06/2011> 1.0.2:
+- Fixed a bug that skipped the last tag when browsing through the tags.
+- Added license to every file.
+- Fixed a bug that kept returning the same attribute when getting a tag's attribute.
+
+<03/06/2011> Version 1.0.1:
+- First version, basic features.

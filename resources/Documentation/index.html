@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>XMLReader Documentation</title>
+		<link REL="SHORTCUT ICON" HREF="http://xmlreader.sourceforge.net/Forum/favicon.ico">
+	</head>
+	<body bgcolor='#FFFBBF'>
+		<h1>XMLReader Documentation</h1>
+		<h2><a name='Contents'>Table of Contents</a></h2>
+			<ul>
+				<li><a href='#Contents'>Table of Contents</a></li>
+				<li><a href='#Introduction'>Introduction</a></li>
+				<li><a href='#Documentation'>Documentation</a></li>
+				<ul>
+					<li><a href='#Namespace'>Namespace</a></li>
+					<li><a href='#Classes'>Classes</a></li>
+					<ul>
+						<li><a href='#Attribute'>Attribute</a></li>
+						<li><a href='#Tag'>Tag</a></li>
+						<li><a href='#File'>File</a></li>
+					</ul>
+					<li><a href='#Functions'>Functions</a></li>
+					<ul>
+						<li><a href='#FindMinimum'>FindMinimum()</a></li>
+						<li><a href='#FindTotalOf'>FindTotalOf()</a></li>
+						<li><a href='#FindNthOf'>FindNthOf()</a></li>
+						<li><a href='#String2'>String2()</a></li>
+					</ul>
+				</ul>
+			</ul>
+		<h2><a name='Introduction'>Introduction</a></h2>
+			<p>This is the latest documentation of XMLReader. If you want to know what XMLReader is check out the <a href='http://xmlreader.sourceforge.net/'>XMLReader Official Website</a>. Terms used in class and function naming are 
+			based on XML so if you're unfamiliar with XML you might want to read a few tutorials.</p>
+			<p><b>Note:</b> Below you will find documentation of all the public members of XMLReader classes and all independent functions defined in the XMLReader namespace. For each entry there is a definition, description and an example of how it can be used.</p>
+		<h2><a name='Documentation'>Documentation</a></h2>
+			<ul>
+				<li><h3><a name='Namespace'>Namespace</a></h3></li>
+				<p>All functions and classes used in XMLReader are defined in the XMLReader namespace. This means that in order to access an element of XMLReader you'll need to use the following syntax: <code>XMLReader::ElementName</code>.</p>
+				
+				<li><h3><a name='Classes'>Classes</a></h3></li>
+					<ul>
+						<li><h4><a name='Attribute'>Attribute</a></h4></li>
+							<ul>
+								<li><p><b>Description:</b></p></li>
+								<p><code>XMLReader::Attribute</code> is a class that resembles an attribute of an XML tag. An <code>XMLReader::Attribute</code> is fully described by two variables, Name and Value.</p>
+
+								<li><p><b>Public Methods:</b></p></li>
+									<ul>
+										<li><h4>Attribute()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												XMLReader::Attribute::Attribute()<br />
+												XMLReader::Attribute::Attribute(string Name, string Value);
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Constructors. Two definitions, second one also specifies the attribute's name and value.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												XMLReader::Attribute Attribute ("Name", "Value");<br />
+												//Or just XMLReader::Attribute Attribute;
+											</code>
+										</ul>
+										
+										<li><h4>~Attribute()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												XMLReader::Attribute::~Attribute()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Destructor. Used to clean up after the object is no longer necessary.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												XMLReader::Attribute Attribute ("Name", "Value");<br />
+												<br />
+												//Do stuff<br />
+												<br />
+												Attribute.~Attribute();
+											</code>
+										</ul>
+
+										<li><h4>Create()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												void XMLReader::Attribute::Create(string &Name, int &Trigger)<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>This method is used to specify the attribute's properties after initialization. Used internally by the constructor.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												XMLReader::Attribute Attribute;<br />
+												string Name = "Name";<br />
+												string Value = "Value";<br />
+												Attribute.Create(Name, Value);
+											</code>
+											<p><b>Note:</b> The arguments of this function are passed by reference so they must be declared before its call.</p>
+										</ul>
+										
+										<li><h4>GetName()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												string &XMLReader::Attribute::GetName()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Returns a reference to the attribute's name.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Attribute Attribute<br />
+												const string &Name = Attribute.GetName();
+											</code>
+											<p><b>Note:</b> You should use a constant reference to avoid accidentally changing the attribute's properties.</p>
+										</ul>
+										
+										<li><h4>GetValue()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												string &XMLReader::Attribute::GetValue()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Returns a reference to the attribute's value.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Attribute Attribute<br />
+												const string &Value = Attribute.GetValue();
+											</code>
+											<p><b>Note:</b> You should use a constant reference to avoid accidentally changing the attribute's properties.</p>
+										</ul>
+										
+										<li><h4>Clear()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												void XMLReader::Attribute::Clear()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Resets the atttribute's properties. Used internally by the destructor.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Attribute Attribute<br />
+												Attribute.Clear();<br />
+												//Reuse attribute
+											</code>
+										</ul>
+									</ul>
+							</ul>
+							
+						<li><h4><a name='Tag'>Tag</a></h4></li>
+							<ul>
+								<li><p><b>Description:</b></p></li>
+								<p><code>XMLReader::Tag</code> is a class that resembles a tag of an XML structure. An <code>XMLReader::Tag</code> has a vector of <code>XMLReader::Attributes</code> that can be browsed through with public methods. An <code>XMLReader::Tag</code> is fully described by three variables, Name, Trigger and Text.</p>
+
+								<li><p><b>Public Methods:</b></p></li>
+									<ul>
+										<li><h4>Tag()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												XMLReader::Tag::Tag()<br />
+												XMLReader::Tag::Tag(string Name, int Trigger)
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Constructors. Two definitions, second one also specifies the tag's name and trigger.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												XMLReader::Tag Tag ("Name", 2);<br />
+												//Or just XMLReader::Tag Tag;
+											</code>
+										</ul>
+										
+										<li><h4>~Tag()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												XMLReader::Tag::~Tag()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Destructor. Used to clean up after the object is no longer necessary.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												XMLReader::Tag Tag ("Name", 2);<br />
+												<br />
+												//Do stuff<br />
+												<br />
+												Tag.~Tag();
+											</code>
+										</ul>
+
+										<li><h4>Create()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												void XMLReader::Tag::Create(string &Name, string &Value)<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>This method is used to specify the tag's properties after initialization. Used internally by the constructor.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												XMLReader::Tag Tag;<br />
+												string Name = "Name";<br />
+												int Trigger = 2;<br />
+												Tag.Create(Name, Trigger);
+											</code>
+											<p><b>Note:</b> The arguments of this function are passed by reference so they must be declared before its call.</p>
+										</ul>
+										
+										<li><h4>ExtendText()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												void XMLReader::Tag::ExtendText(string &Text)<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Extends the text variable of the tag.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Tag::Tag<br/>
+												string Text = "Text";<br />
+												Tag.ExtendText(Text);
+											</code>
+										</ul>
+										
+										<li><h4>AddAttribute()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												void XMLReader::Tag::AddAttribute(XMLReader::Attribute &Attribute)<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Adds passed attribute to the tag.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Tag::Tag<br/>
+												XMLReader::Attribute Attribute ("Name", "Value"); <br />
+												<br />
+												Tag.AddAttribute(Attribute);
+											</code>
+										</ul>
+										<li><h4>GetName()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												string &XMLReader::Tag::GetName()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Returns a reference to the tag's name.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Tag::Tag<br/>
+												const string &Name = Tag.GetName();
+											</code>
+											<p><b>Note:</b> You should use a constant reference to avoid accidentally changing the tag's properties.</p>
+										</ul>
+										
+										<li><h4>GetTrigger()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												int &XMLReader::Attribute::GetValue()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Returns a reference to the tag's Trigger.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Tag::Tag<br/>
+												const int &Trigger = Tag.GetTrigger();
+											</code>
+											<p>
+												<b>Note:</b> You should use a constant reference to avoid accidentally changing the tag's properties.<br />
+												<b>Note 2:</b> <code>XMLReader::Tag::Trigger</code> defines the nature of the tag. It is an integer and has the following possible values: 0, if the tag is a close tag (<code>&lt;/Tag&gt;</code>), 1, if it's an open tag (<code>&lt;Tag&gt;</code>), 2, if the tag is self-closing (<code>&lt;Tag /&gt;</code>), 3 if the tag is a declaration tag (<code>&lt;?xml ?&gt;</code>).
+											</p>
+										</ul>
+										
+										<li><h4>GetText()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												string &XMLReader::Tag::GetText()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Returns a reference to the tag's text.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Tag Tag<br />
+												const string &Text = Tag.GetText();
+											</code>
+											<p><b>Note:</b> You should use a constant reference to avoid accidentally changing the tag's properties.<br />
+											<b>Note 2:</b> <code>XMLReader::Tag::Text</code> contains any non-tag string between an opening and a closing tag. Example: <code>&lt;Tag&gt;Text&lt;/Tag&gt;</code>.</p>
+										</ul>
+										
+										<li><h4>GetAttribute()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												XMLReader::Attribute &XMLReader::Tag::GetAttribute()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Returns a reference to the tag's current attribute. Next call to this function will return the next attribute.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Tag Tag<br />
+												XMLReader::Attribute &Attribute = Tag.GetAttribute();
+											</code>
+										</ul>
+										
+										<li><h4>HasAttributes()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												bool XMLReader::Tag::HasAttributes()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Returns true if the tag has more attributes to browse through, false otherwise. Calls <code>XMLReader::Tag::Reset()</code> on false.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Tag Tag<br />
+												while (Tag.HasAttributes()) {<br />
+												&nbsp; &nbsp; XMLReader::Attribute &Attribute = Tag.GetAttribute();<br/>
+												}
+												
+											</code>
+										</ul>
+										
+										<li><h4>Clear()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												void XMLReader::Tag::Clear()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Resets the tag's properties and clear all attributes. Used internally by the destructor.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::Tag Tag<br />
+												Tag.Clear();<br />
+												//Reuse tag
+											</code>
+										</ul>
+									</ul>
+							</ul>
+							
+						<li><h4><a name='File'>File</a></h4></li>
+							<ul>
+								<li><p><b>Description:</b></p></li>
+								<p><code>XMLReader::File</code> is a class that resembles an XML structure. An <code>XMLReader::File</code> has a vector of <code>XMLReader::Tags</code> that can be browsed through with public methods.</p>
+
+								<li><p><b>Public Methods:</b></p></li>
+									<ul>
+										<li><h4>File()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												XMLReader::File::File()<br />
+												XMLReader::File(string Location, string Root = "")
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Constructors. Two definitions, second one also parses a file. Root argument is optional, and specifies the root element XML structure. If not defined, parser assumes first tag is the root element.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												XMLReader::File File ("MyData.xml");<br />
+												//Or just XMLReader::File File;
+											</code>
+										</ul>
+										
+										<li><h4>~File()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												XMLReader::File::~File()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Destructor. Used to clean up after the object is no longer necessary.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												string Location = "MyData.xml";<br />
+												XMLReader::File File (Location);<br />
+												<br />
+												//Do stuff<br />
+												<br />
+												File.~File();
+											</code>
+											<p><b>Note:</b> C++ automatically calls a variable's destructor if it goes out of scope, so routine described above might crash your program. Be warry when you call it.</p>
+										</ul>
+
+										<li><h4>Parse()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												int XMLReader::File::Parse(string &Location, string Root = "")<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Attempts to Parse the file specified in the argument. Returns 0 on failure, 1 on success. Arguments have been explained in the constructor.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												XMLReader::File File;<br />
+												string Location = "MyData.xml";<br />
+												if (File.Parse(Location)) {<br />
+												&nbsp; &nbsp; //Do stuff<br />
+												}
+											</code>
+										</ul>
+										
+										<li><h4>AddTag()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												void XMLReader::File::AddTag(XMLReader::Tag &Tag)<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Adds passed tag to the file.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::File File<br />
+												XMLReader::Tag Tag ("Name", 2);<br />
+												<br />
+												File.AddTag(Tag);
+											</code>
+										</ul>
+										
+										<li><h4>GetTag()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												XMLReader::Tag &XMLReader::File::GetTag()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Returns a reference to the file's current tag. Next call to this function will return the next tag.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::File File<br />
+												XMLReader::Tag &Tag = File.GetTag();
+											</code>
+										</ul>
+										
+										<li><h4>HasTags()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												bool XMLReader::File::HasTags()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Returns true if the file has more tags to browse through, false otherwise. Calls <code>XMLReader::File::Reset()</code> on false.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initializedz XMLReader::File File<br />
+												while (File.HasTags()) {<br />
+												&nbsp; &nbsp; XMLReader::Tag &Tag = File.GetTag();<br/>
+												}
+												
+											</code>
+										</ul>
+										
+										<li><h4>Build()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												void XMLReader::File::Build(string TargetLocation = "")<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Builds the structure in XML format. If <code>TargetLocation</code> is specified, it outputs to the target file, otherwise the file is printed on the console.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												string Location = "MyData.xml";<br />
+												XMLReader::File File;<br />
+												if (File.Parse(Location)) {<br />
+												&nbsp; &nbsp; File.Build(); //To the console.<br />
+												&nbsp; &nbsp; File.Build("MySavedData.xml"); //To the file.<br />
+												}
+											</code>
+										</ul>
+										
+										<li><h4>Clear()</h4></li>
+										<ul>
+											<li><p><b>Definition:</b></p></li>
+											<code>
+												void XMLReader::File::Clear()<br />
+											</code>
+											
+											<li><p><b>Description:</b></p></li>
+											<p>Resets the file's properties and clears all tags. Used internally by the destructor.</p>
+											
+											<li><p><b>Use:</b></p></li>
+											<code>
+												//Already initialized XMLReader::File File<br />
+												File.Clear();<br />
+												//Reuse file
+											</code>
+										</ul>
+									</ul>
+							</ul>
+					</ul>
+
+				<li><h3><a name='Functions'>Functions</a></h3></li>
+					<ul>
+						<li><h4><a name='FindMinimum'>FindMinimum()</a></h4></li>
+						<ul>
+							<li><p><b>Definition:</b></p></li>
+							<code>
+								int XMLReader::FindMinimum(int Integers[], int Size)<br />
+							</code>
+							
+							<li><p><b>Description:</b></p></li>
+							<p>Returns the minimum value from an array of integers. The size of the array is passed as an argument.</p>
+							
+							<li><p><b>Use:</b></p></li>
+							<code>
+								int Integers[4] = {0, 1, 42, 6124};<br />
+								int Minimum = XMLReader::FindMinimum(Integers, 4);
+							</code>
+						</ul>
+						
+						<li><h4><a name='FindTotalOf'>FindTotalOf()</a></h4></li>
+						<ul>
+							<li><p><b>Definition:</b></p></li>
+							<code>
+								int XMLReader::FindTotalOf(char Character, const string &String)<br />
+							</code>
+							
+							<li><p><b>Description:</b></p></li>
+							<p>Returns the total occurences of Character in String.</p>
+							
+							<li><p><b>Use:</b></p></li>
+							<code>
+								string String = "1;2;3;4;5;6;7";<br />
+								int TotalSemiColons = XMLReader::FindTotalOf(';', String);<br />
+							</code>
+						</ul>
+						
+						<li><h4><a name='FindNthOf'>FindNthOf()</a></h4></li>
+						<ul>
+							<li><p><b>Definition:</b></p></li>
+							<code>
+								int XMLReader::FindNthOf(int &Occurence, char Character, const string &String)<br />
+							</code>
+							
+							<li><p><b>Description:</b></p></li>
+							<p>Returns position of the nth occurence of Character in String, where n = Occurence. The position of the (n+1)th character is also returned in Occurence. Returns -1 if not found.</p>
+							
+							<li><p><b>Use:</b></p></li>
+							<code>
+								string String = "1;2;3;4;5;6;7";<br />
+								int TotalSemiColons = XMLReader::FindTotalOf(';', String);<br />
+								int i = 3;
+								int ThirdSemiColon = XMLReader::FindNthOf(i, ';', String);<br />
+								//i now holds the position of the fourth semicolon or -1 if there is no next occurence.
+							</code>
+						</ul>
+							
+						<li><h4><a name='String2'>String2()</a></h4></li>
+						<ul>
+							<li><p><b>Definition:</b></p></li>
+							<code>
+								template &lt;class Type&gt;<br />
+								Type XMLReader::String2(const string &String, char Seperator = '\0', int SubstringNumber = 0);
+							</code>
+								
+							<li><p><b>Description:</b></p></li>
+							<p>Converts a string to Type and returns the converted value. The seperator argument is used for strings like '800x600', in which the character 'x' is the seperator. If you use a seperator you must also specify which substring you want to return, 0 being 800 and 1 being 600, in the previous example. By default the first substring is returned.</p>
+							
+							<li><p><b>Use:</b></p></li>
+							<code>
+								//Without seperator<br />
+								string String = "2011";<br />
+								int Integer = XMLReader::String2&lt;int&gt;(String);<br />
+								<br />
+								//With seperator<br />
+								string OtherString = "0;1;2;3;4;5;6";<br />
+								int OtherInteger = XMLReader::String2&lt;int&gt;(OtherString, ';', 2); //this will the value between the second and third semicolons, 2.
+							</code>
+							<p><b>Note:</b> Built-in valid types are int, bool, char, float.</p>
+						</ul>
+					</ul>
+			</ul>
+	</body>
+</html>

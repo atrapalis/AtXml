@@ -1,0 +1,4 @@
+No features are planned for immediate implementation. However, there are some ideas:
+- Add comment support.
+- XSD?
+- Rethink class structure. Perhaps the library will benefit from a parent-element relationship implemented in tags, attributes or both.
