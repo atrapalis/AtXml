@@ -1,6 +1,6 @@
 # AtXml 
 
-XML Parser library written in C++. Developed using only C++ standard libraries. Some examples and documentation can be found in the 'resources' folder.
+Custom XML Parser library. Developed using only C++ standard libraries. Some examples and documentation can be found in the 'resources' folder.
 
 This library is no longer in development but served its purpose to parse and interpret data such as User Interface structures stored in XML for other C++ projects.
 
@@ -24,3 +24,74 @@ This library is no longer in development but served its purpose to parse and int
 
 ## Dependencies
 - None
+
+## Example
+
+In this simple example, this library is used to load a set of settings from an XML file into memory.
+
+*Settings.xml*
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+	<Fullscreen />
+	<Resolution>800x600</Resolution>
+	<BitsPerPixel>32</BitsPerPixel>
+	<GameSpeed>25</GameSpeed>
+	<FrameSkip>5</FrameSkip>
+</Settings>
+```
+
+*Main.cpp*
+```
+#include <AtXml/AtXml.h>
+#include <iostream> //cout Function
+using namespace std;
+
+int main() {
+    //Initialize variables
+    bool Fullscreen = false;
+    int Width = 0;
+    int Height = 0;
+    int BitsPerPixel = 0;
+    int Speed = 0;
+
+    //Initialize a file
+    AtXml::File File;
+    string Location = "Settings.xml";
+
+    //File parser returns 0 on failure, 1 on success.
+    if (File.Parse(Location, "Settings")) {
+        //Tag loop
+        while (File.HasTags()) {
+            AtXml::Tag &Tag = File.GetTag();
+            const string &Name = Tag.GetName();
+            const int &Trigger = Tag.GetTrigger();
+            const string &Text = Tag.GetText();
+
+            //Tag Handler
+            if (Name == "Fullscreen" && Trigger == 2) {
+                Fullscreen = true;
+            } else if (Name == "BitsPerPixel" && Trigger == 1) {
+                BitsPerPixel = AtXml::String2<int>(Text);
+            } else if (Name == "Resolution" && Trigger == 1) {
+                Width = AtXml::String2<int>(Text, 'x');
+                Height = AtXml::String2<int>(Text, 'x', 1);
+            } else if (Name == "GameSpeed" && Trigger == 1) {
+                Speed = AtXml::String2<int>(Text);
+            }
+        }
+
+        //Verify results
+        if (Fullscreen) {
+            cout << "Launch game in fullscreen mode" << endl;
+        } else {
+            cout << "Launch game in window mode." << endl;
+        }
+
+        cout << "Rendering resolution: " << Width << "x" << Height << endl;
+        cout << "Bits per pixel: " << BitsPerPixel << endl;
+        cout << "Game speed: " << Speed << endl;
+    }
+    return 0;
+}
+```
