@@ -44,7 +44,7 @@ In this simple example, this library is used to load a set of settings from an X
 *Main.cpp*
 ```
 #include <AtXml/AtXml.h>
-#include <iostream> //cout Function
+#include <iostream>
 using namespace std;
 
 int main() {
@@ -69,14 +69,14 @@ int main() {
             const string &Text = Tag.GetText();
 
             //Tag Handler
-            if (Name == "Fullscreen" && Trigger == 2) {
+            if (Name == "Fullscreen" && Trigger == AtXml::Trigger::OpenClose) {
                 Fullscreen = true;
-            } else if (Name == "BitsPerPixel" && Trigger == 1) {
+            } else if (Name == "BitsPerPixel" && Trigger == AtXml::Trigger::Open) {
                 BitsPerPixel = AtXml::String2<int>(Text);
-            } else if (Name == "Resolution" && Trigger == 1) {
+            } else if (Name == "Resolution" && Trigger == AtXml::Trigger::Open) {
                 Width = AtXml::String2<int>(Text, 'x');
-                Height = AtXml::String2<int>(Text, 'x', 1);
-            } else if (Name == "GameSpeed" && Trigger == 1) {
+                Height = AtXml::String2<int>(Text, 'x', AtXml::Trigger::Open);
+            } else if (Name == "GameSpeed" && Trigger == AtXml::Trigger::Open) {
                 Speed = AtXml::String2<int>(Text);
             }
         }
