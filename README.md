@@ -5,29 +5,16 @@ Custom XML Parser library. Developed using only C++ standard libraries. Some exa
 This library is no longer in development but served its purpose to parse and interpret data such as User Interface structures stored in XML for other C++ projects.
 
 ## Classes
-- **Tag:** Used to describe a tag as defined in an XML document, e.g.
-```
-<Tag>Content</Tag>
-<Tag />
-```
-- **Attribute:** Used to describe attributes as defined in an XML tag, e.g.
-```
-<Tag Attribute="value" />
-```
-- **File:** Used to parse XML documents, and store data to memory using Tag/Attribute classes, e.g.
-```
-<Tag Attribute1="false">
-  <NestedTag1 Attribute2="true" />
-  <NestedTag2>Content</NestedTag2>
-</Tag>
-```
+- **Tag:** Used to describe a tag as defined in an XML document.
+- **Attribute:** Used to describe attributes as defined in an XML tag.
+- **File:** Used to parse XML documents, and store data to memory using Tag/Attribute classes.
 
 ## Dependencies
 - None
 
 ## Example
 
-In this simple example, this library is used to load a set of settings from an XML file into memory.
+In this example, this library is used to initialise a set of settings from an XML file.
 
 *Settings.xml*
 ```
