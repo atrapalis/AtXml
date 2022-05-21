@@ -1,5 +1,5 @@
-#include <XMLReader/XMLReader.h>
-#include <iostream> //cout Function
+#include <AtXml/AtXml.h>
+#include <iostream>
 using namespace std;
 
 int main() {
@@ -11,28 +11,28 @@ int main() {
     int Speed = 0;
 
     //Initialize a file
-    XMLReader::File File;
+    AtXml::File File;
     string Location = "Settings.xml";
 
     //File parser returns 0 on failure, 1 on success.
     if (File.Parse(Location, "Settings")) {
         //Tag loop
         while (File.HasTags()) {
-            XMLReader::Tag &Tag = File.GetTag();
+            AtXml::Tag &Tag = File.GetTag();
             const string &Name = Tag.GetName();
             const int &Trigger = Tag.GetTrigger();
             const string &Text = Tag.GetText();
 
             //Tag Handler
-            if (Name == "Fullscreen" && Trigger == 2) {
+            if (Name == "Fullscreen" && Trigger == AtXml::Trigger::OpenClose) {
                 Fullscreen = true;
-            } else if (Name == "BitsPerPixel" && Trigger == 1) {
-                BitsPerPixel = XMLReader::String2<int>(Text);
-            } else if (Name == "Resolution" && Trigger == 1) {
-                Width = XMLReader::String2<int>(Text, 'x');
-                Height = XMLReader::String2<int>(Text, 'x', 1);
-            } else if (Name == "GameSpeed" && Trigger == 1) {
-                Speed = XMLReader::String2<int>(Text);
+            } else if (Name == "BitsPerPixel" && Trigger == AtXml::Trigger::Open) {
+                BitsPerPixel = AtXml::String2<int>(Text);
+            } else if (Name == "Resolution" && Trigger == AtXml::Trigger::Open) {
+                Width = AtXml::String2<int>(Text, 'x');
+                Height = AtXml::String2<int>(Text, 'x', AtXml::Trigger::Open);
+            } else if (Name == "GameSpeed" && Trigger == AtXml::Trigger::Open) {
+                Speed = AtXml::String2<int>(Text);
             }
         }
 
