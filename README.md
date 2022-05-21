@@ -1,6 +1,6 @@
 # AtXml 
 
-Custom XML Parser library. Developed using only C++ standard libraries. Some examples and documentation can be found in the 'resources' folder.
+Custom XML Parser library. Developed using only C++ standard libraries. Some examples can be found in the 'docs' folder.
 
 This library is no longer in development but served its purpose to parse and interpret data such as User Interface structures stored in XML for other C++ projects.
 
