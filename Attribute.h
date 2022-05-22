@@ -6,13 +6,15 @@
 #include <sstream>
 
 namespace AtXml {
+	/// Class used to implement an XML attribute.
+	/** An attribute is implemented using two variables: Name, and Value. */
     class Attribute {
         //Attributes
         protected:
-            std::string Name, Value;
+            std::string Name;                                                       //!< Name of the XML attribute.
+            std::string Value;                                                      //!< Value of the XML attribute.
         //Access Methods
         public:
-            Attribute();
             Attribute(std::string Name, std::string Value);
             template <typename Type> Attribute(std::string Name, Type Value);
             ~Attribute();
@@ -24,6 +26,9 @@ namespace AtXml {
         public:
     };
 
+	/// Template constructor.
+	/** @param Name The Name member of the attribute.
+        @param Value The Value member of the attribute, automatically converted to a C++ string. */
     template <typename Type>
     Attribute::Attribute(std::string Name, Type Value) {
         this->Name = Name;

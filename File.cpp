@@ -6,10 +6,13 @@
 #include <fstream>
 
 namespace AtXml {
+    /// Adds specified Tag to the list of tags.
     void File::AddTag(Tag Tag) {
         Tags.push_back(Tag);
     }
 
+    /// Used to output the contents of the class in XML format.
+	/** @param TargetLocation The output location of the XML file. If not specified, the file is printed on the console. */
     void File::Build(std::string TargetLocation) {
         //Save CurrentTag
         int Temp = CurrentTag;
@@ -99,16 +102,21 @@ namespace AtXml {
         CurrentTag = Temp;
     }
 
+    /// Re-initialise all class members to default values and clear list of tags.
     void File::Clear() {
         Tags.clear();
         CurrentTag = 0;
     }
 
+    /// Constructor with optional parameters.
+	/** @param Location The location of the XML file.
+        @param Type The root element of the XML file. If not specified, the first tag encountered is used as the root element. */
     File::File(std::string Location, std::string Type) {
         CurrentTag = 0;
         if (Location != "") Parse(Location, Type);
     }
 
+    /// Returns the next tag from the list and increments index `CurrentTag`.
     Tag File::GetTag() {
         Tag Tag = Tags[CurrentTag];
         CurrentTag+=1;
@@ -116,12 +124,17 @@ namespace AtXml {
         return Tag;
     }
 
+    /// Used to check whether the end of the Tags list has been reached.
+    /** Determined by the value of the index `CurrentTag`. */
     bool File::HasTags() {
         bool HasTags = false;
         if (CurrentTag < (signed)Tags.size()) HasTags = true;
         return HasTags;
     }
 
+    /// Parses the specified XML file.
+	/** @param Location The location of the XML file.
+        @param Root The root element of the XML file. If not specified, the first tag encountered is used as the root element. */
     int File::Parse(std::string Location, std::string Root) {
         int Parse = 0;
 
@@ -389,14 +402,17 @@ namespace AtXml {
         return Parse;
     }
 
+    /// Resets index `CurrentTag` to 0.
     void File::Reset() {
         CurrentTag = 0;
     }
 
+    /// Sets the declaration tag using the specified parameter.
     void File::SetDeclaration(Tag Tag) {
         Declaration = Tag;
     }
 
+    /// Basic destructor.
     File::~File() {
         Tags.clear();
         CurrentTag = 0;

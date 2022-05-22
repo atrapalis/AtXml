@@ -3,13 +3,16 @@
 #define ATXML_FILE_H
 
 #include "Tag.h"
+/// Contains all class and function implementations of the project.
 namespace AtXml {
+	/// Class used to parse, implement, and output XML files.
+	/** The XML file is implemented as a list of tags which can be accessed using public methods. */
     class File {
         //Attributes
         protected:
-            Tag Declaration;
-            std::vector<Tag> Tags;
-            int CurrentTag;
+            Tag Declaration; 			                                    //!< XML declaration tag of the file.
+            std::vector<Tag> Tags; 		                                    //!< List of Tags contained in the file.
+            int CurrentTag; 			                                    //!< Index of attribute returned by GetTag() method.
         //Access Methods
         public:
             File(std::string Location = "", std::string Root = "");

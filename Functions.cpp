@@ -2,6 +2,9 @@
 #include "Functions.h"
 
 namespace AtXml {
+    /// Returns the minimum value from an array of integers.
+	/** @param Integers The array of integers.
+        @param Size The size of the array. */
     int FindMinimum(int Integers[], int Size) {
         int r = 0;
 
