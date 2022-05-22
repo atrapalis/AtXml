@@ -15,7 +15,7 @@ namespace AtXml {
             std::string Value;                                                      //!< Value of the XML attribute.
         //Access Methods
         public:
-            Attribute(std::string Name, std::string Value);
+            Attribute(std::string Name = "", std::string Value = "");
             template <typename Type> Attribute(std::string Name, Type Value);
             ~Attribute();
             std::string GetName();
