@@ -1,18 +1,16 @@
 # AtXml 
 
-Custom XML Parser library. Developed using only C++ standard libraries. Some examples can be found in the 'docs' folder.
+A custom C++ XML Parser library.
 
-This library is no longer in development but served its purpose to parse and interpret data such as User Interface structures stored in XML for other C++ projects.
+This library is no longer in development but served its purpose to parse and interpret data such as User Interface structures stored in XML for my C++ projects.
 
-## Classes
-- **Tag:** Used to describe a tag as defined in an XML document.
-- **Attribute:** Used to describe attributes as defined in an XML tag.
-- **File:** Used to parse XML documents, and store data to memory using Tag/Attribute classes.
+## Compiling
+To compile the source code, it is recommended to use the Code::Blocks project included in this repository. This library has only been tested in Windows environments. 
 
-## Dependencies
-- None
+## Documentation
+Documentation can be found in the [GitHub pages](https://atrapalis.github.io/AtXml/) for this project.
 
-## Example
+## Example Usage
 
 In this example, this library is used to initialise a set of settings from an XML file.
 
