@@ -1,8 +1,8 @@
 # AtXml 
 
-A custom C++ XML Parser library.
+A custom XML Parser library written in C++.
 
-This library is no longer in development but served its purpose to parse and interpret data such as User Interface structures stored in XML for my C++ projects.
+This library is no longer in development but was used to parse and interpret data such as User Interface structures stored in XML for my C++ projects.
 
 ## Compiling
 To compile the source code, it is recommended to use the Code::Blocks project included in this repository. This library has only been tested in Windows environments. 
