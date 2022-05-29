@@ -1,6 +1,6 @@
 # AtXml 
 
-A custom XML Parser library written in C++.
+An XML Parser library written in C++.
 
 This library is no longer in development but was used to parse and interpret data such as User Interface structures stored in XML for my C++ projects.
 
