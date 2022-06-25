@@ -1,4 +1,4 @@
-# AtXml 
+# antXml 
 
 An XML parser written in C++.
 
@@ -8,7 +8,7 @@ This library is no longer in development but was used to parse and interpret dat
 To compile the source code, it is recommended to use the Code::Blocks project included in this repository. This library has only been tested in Windows environments. 
 
 ## Documentation
-Documentation can be found in the [GitHub pages](https://atrapalis.github.io/AtXml/) for this project.
+Documentation can be found in the [GitHub pages](https://atrapalis.github.io/antXml/) for this project.
 
 ## Example Usage
 
