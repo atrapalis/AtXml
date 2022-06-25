@@ -1,7 +1,7 @@
 //Functions.cpp
 #include "Functions.h"
 
-namespace AtXml {
+namespace antXml {
     /// Returns the minimum value from an array of integers.
 	/** @param Integers The array of integers.
         @param Size The size of the array. */

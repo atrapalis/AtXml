@@ -5,7 +5,7 @@
 #include <sstream>
 #include <fstream>
 
-namespace AtXml {
+namespace antXml {
     /// Adds specified Tag to the list of tags.
     void File::AddTag(Tag Tag) {
         Tags.push_back(Tag);
@@ -23,7 +23,7 @@ namespace AtXml {
         StringStream << "<?xml";
 
         while (Declaration.HasAttributes()) {
-            AtXml::Attribute Attribute = Declaration.GetAttribute();
+            antXml::Attribute Attribute = Declaration.GetAttribute();
             const std::string AttributeName = Attribute.GetName();
             const std::string AttributeValue = Attribute.GetValue();
 
@@ -74,7 +74,7 @@ namespace AtXml {
             StringStream << Name;
 
             while (Tag.HasAttributes()) {
-                AtXml::Attribute Attribute = Tag.GetAttribute();
+                antXml::Attribute Attribute = Tag.GetAttribute();
                 const std::string AttributeName = Attribute.GetName();
                 const std::string AttributeValue = Attribute.GetValue();
 
@@ -95,7 +95,7 @@ namespace AtXml {
                 OutputFile.open (TargetLocation.c_str());
                 OutputFile << StringStream.rdbuf();
                 OutputFile.close();
-            } else std::cerr << "AtXml: Writing failed. Attempted to write empty structure to " << TargetLocation << "." << std::endl;
+            } else std::cerr << "antXml: Writing failed. Attempted to write empty structure to " << TargetLocation << "." << std::endl;
         }
 
         //Restore CurrentTag
@@ -236,7 +236,7 @@ namespace AtXml {
                                 } else {
                                     //Verify trigger
                                     if (Trigger == Trigger::Declaration) {
-                                        if (Line[CriticalSpot[0]-1] != '?') std::cerr << "AtXml: Invalid XML declaration format at " << Location << ":" << CurrentLine << "." << std::endl;
+                                        if (Line[CriticalSpot[0]-1] != '?') std::cerr << "antXml: Invalid XML declaration format at " << Location << ":" << CurrentLine << "." << std::endl;
                                     }
                                 }
 
@@ -252,10 +252,10 @@ namespace AtXml {
                                 Tag Tag;
                                 if (Trigger == Trigger::Declaration) {
                                     if (TagString == "xml") {
-                                        Declaration = AtXml::Tag(TagString, Trigger);
-                                    } else std::cerr << "AtXml: Invalid XML declaration format at " << Location << ":" << CurrentLine << "." << std::endl;
+                                        Declaration = antXml::Tag(TagString, Trigger);
+                                    } else std::cerr << "antXml: Invalid XML declaration format at " << Location << ":" << CurrentLine << "." << std::endl;
                                 } else {
-                                    Tag = AtXml::Tag(TagString, Trigger);
+                                    Tag = antXml::Tag(TagString, Trigger);
                                     if (Root == "" && Trigger == Trigger::Open) Root = TagString;
                                 }
 
@@ -301,9 +301,9 @@ namespace AtXml {
                                             Linestream.ignore();
                                             getline(Linestream, AttributeValue, Peek);
                                             Peek = Linestream.peek();
-                                        } else std::cerr << "AtXml: Invalid attribute value. Expected quotation mark at " << Location << ":" << CurrentLine << "." << std::endl;
+                                        } else std::cerr << "antXml: Invalid attribute value. Expected quotation mark at " << Location << ":" << CurrentLine << "." << std::endl;
 
-                                        Attribute Attribute = AtXml::Attribute(AttributeName, AttributeValue);
+                                        Attribute Attribute = antXml::Attribute(AttributeName, AttributeValue);
 
                                         if (Trigger == Trigger::Declaration) {
                                             Declaration.AddAttribute(Attribute);
@@ -323,7 +323,7 @@ namespace AtXml {
                                         Linestream.ignore();
                                         Peek = Linestream.peek();
                                     } else {
-                                        std::cerr << "AtXml: Syntax error. Check for missing quotation marks or '>' at " << Location << ":" << CurrentLine << "." << std::endl;
+                                        std::cerr << "antXml: Syntax error. Check for missing quotation marks or '>' at " << Location << ":" << CurrentLine << "." << std::endl;
                                     }
                                 } else MoreTags = false;
 
@@ -338,10 +338,10 @@ namespace AtXml {
                                             MoreLines = false;
                                             MoreTags = false;
                                             if (!Linestream.eof()) {
-                                                std::cerr << "AtXml: Found data outside of root element at " << Location << ":" << CurrentLine << "." << std::endl;
+                                                std::cerr << "antXml: Found data outside of root element at " << Location << ":" << CurrentLine << "." << std::endl;
                                             } else if (!XML.eof()) {
                                                 getline(XML, Line);
-                                                if (Line != "") std::cerr << "AtXml: Found data outside of root element at " << Location << ":" << CurrentLine+1 << "." << std::endl;
+                                                if (Line != "") std::cerr << "antXml: Found data outside of root element at " << Location << ":" << CurrentLine+1 << "." << std::endl;
                                             }
                                         }
                                     }
@@ -349,7 +349,7 @@ namespace AtXml {
 
                                 if (XML.eof() && !MoreTags) {
                                     if (RootFlag) {
-                                        if (Tag.GetName() != Root || (Tag.GetName() == Root && Tag.GetTrigger() != 0)) std::cerr << "AtXml: Root element not closed. End of file reached at " << Location << ":" << CurrentLine << "."<< std::endl;
+                                        if (Tag.GetName() != Root || (Tag.GetName() == Root && Tag.GetTrigger() != 0)) std::cerr << "antXml: Root element not closed. End of file reached at " << Location << ":" << CurrentLine << "."<< std::endl;
                                     }
                                 }
                             }
@@ -371,8 +371,8 @@ namespace AtXml {
                             //Add to tag
                             if (Text != "") {
                                 if (Tags.size() > 0) {
-                                    if (Tags.back().GetTrigger() == Trigger::Open) Tags.back().AddText(Text); else std::cerr << "AtXml: Unexpected characters ignored at " << Location << ":" << CurrentLine << "." << std::endl;
-                                } else std::cerr << "AtXml: Unexpected characters ignored at " << Location << ":" << CurrentLine << "." << std::endl;
+                                    if (Tags.back().GetTrigger() == Trigger::Open) Tags.back().AddText(Text); else std::cerr << "antXml: Unexpected characters ignored at " << Location << ":" << CurrentLine << "." << std::endl;
+                                } else std::cerr << "antXml: Unexpected characters ignored at " << Location << ":" << CurrentLine << "." << std::endl;
                             }
                         }
                     }
@@ -390,9 +390,9 @@ namespace AtXml {
                 }
             }
 
-            if (Declaration == "") std::cerr << "AtXml: XML declaration not found in " << Location << "." << std::endl;
+            if (Declaration == "") std::cerr << "antXml: XML declaration not found in " << Location << "." << std::endl;
             if (!RootFlag) {
-                std::cerr << "AtXml: Root element not found. End of file reached at " << Location << ":" << CurrentLine << "."<< std::endl;
+                std::cerr << "antXml: Root element not found. End of file reached at " << Location << ":" << CurrentLine << "."<< std::endl;
             }
 
             XML.close();

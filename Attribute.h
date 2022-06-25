@@ -1,11 +1,11 @@
 //Attribute.h
-#ifndef ATXML_ATTRIBUTE_H
-#define ATXML_ATTRIBUTE_H
+#ifndef ANTXML_ATTRIBUTE_H
+#define ANTXML_ATTRIBUTE_H
 
 #include <string>
 #include <sstream>
 
-namespace AtXml {
+namespace antXml {
 	/// Class used to implement an XML attribute.
 	/** An attribute is implemented using two variables: Name, and Value. */
     class Attribute {

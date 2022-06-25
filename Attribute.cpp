@@ -1,7 +1,7 @@
 //Attribute.cpp
 #include "Attribute.h"
 
-namespace AtXml {
+namespace antXml {
     /// Constructor with optional parameters.
 	/** @param Name The Name member of the attribute.
         @param Value The Value member of the attribute. */

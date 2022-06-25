@@ -1,10 +1,10 @@
 //Tag.h
-#ifndef ATXML_TAG_H
-#define ATXML_TAG_H
+#ifndef ANTXML_TAG_H
+#define ANTXML_TAG_H
 
 #include "Attribute.h"
 #include <vector>
-namespace AtXml {
+namespace antXml {
 	/// Namespace used to enumerate different Tag types.
     namespace Trigger {
         const int Close         = 0;                            //!< A closing tag, e.g. `</Tag>.`

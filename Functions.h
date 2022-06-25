@@ -1,9 +1,9 @@
 //Functions.h
-#ifndef ATXML_FUNCTIONS_H
-#define ATXML_FUNCTIONS_H
+#ifndef ANTXML_FUNCTIONS_H
+#define ANTXML_FUNCTIONS_H
 
 #include <string>
-namespace AtXml {
+namespace antXml {
     int FindMinimum(int Integers[], int Size);
 }
 
