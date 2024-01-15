@@ -28,7 +28,7 @@ In this example, this library is used to initialise a set of settings from an XM
 
 *Main.cpp*
 ```
-#include <AtXml/AtXml.h>
+#include <AntXml/AntXml.h>
 #include <iostream>
 using namespace std;
 
@@ -41,28 +41,28 @@ int main() {
     int Speed = 0;
 
     //Initialize a file
-    AtXml::File File;
+    AntXml::File File;
     string Location = "Settings.xml";
 
     //File parser returns 0 on failure, 1 on success.
     if (File.Parse(Location, "Settings")) {
         //Tag loop
         while (File.HasTags()) {
-            AtXml::Tag &Tag = File.GetTag();
+            AntXml::Tag &Tag = File.GetTag();
             const string &Name = Tag.GetName();
             const int &Trigger = Tag.GetTrigger();
             const string &Text = Tag.GetText();
 
             //Tag Handler
-            if (Name == "Fullscreen" && Trigger == AtXml::Trigger::OpenClose) {
+            if (Name == "Fullscreen" && Trigger == AntXml::Trigger::OpenClose) {
                 Fullscreen = true;
-            } else if (Name == "BitsPerPixel" && Trigger == AtXml::Trigger::Open) {
-                BitsPerPixel = AtXml::String2<int>(Text);
-            } else if (Name == "Resolution" && Trigger == AtXml::Trigger::Open) {
-                Width = AtXml::String2<int>(Text, 'x');
-                Height = AtXml::String2<int>(Text, 'x', AtXml::Trigger::Open);
-            } else if (Name == "GameSpeed" && Trigger == AtXml::Trigger::Open) {
-                Speed = AtXml::String2<int>(Text);
+            } else if (Name == "BitsPerPixel" && Trigger == AntXml::Trigger::Open) {
+                BitsPerPixel = AntXml::String2<int>(Text);
+            } else if (Name == "Resolution" && Trigger == AntXml::Trigger::Open) {
+                Width = AntXml::String2<int>(Text, 'x');
+                Height = AntXml::String2<int>(Text, 'x', AntXml::Trigger::Open);
+            } else if (Name == "GameSpeed" && Trigger == AntXml::Trigger::Open) {
+                Speed = AntXml::String2<int>(Text);
             }
         }
 

@@ -2,7 +2,7 @@
 *.depend
 *.o
 *.res
-bin/
-lib/
+src/bin/
+src/lib/
 docs/xml
 docs/Moxyfile.bat
