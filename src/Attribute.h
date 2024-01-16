@@ -1,41 +1,43 @@
-//Attribute.h
+// Attribute.h
 #ifndef ANTXML_ATTRIBUTE_H
 #define ANTXML_ATTRIBUTE_H
 
 #include <string>
 #include <sstream>
 
-namespace antXml {
+namespace antxml {
 	/// Class used to implement an XML attribute.
-	/** An attribute is implemented using two variables: Name, and Value. */
+	/** An attribute is implemented using two variables: name, and value. */
     class Attribute {
-        //Attributes
+        // Fields
         protected:
-            std::string Name;                                                       //!< Name of the XML attribute.
-            std::string Value;                                                      //!< Value of the XML attribute.
-        //Access Methods
+            std::string name;                                                       //!< The name of the XML attribute.
+            std::string value;                                                      //!< The value of the XML attribute.
+        
+        // Methods
         public:
-            Attribute(std::string Name = "", std::string Value = "");
-            template <typename Type> Attribute(std::string Name, Type Value);
-            ~Attribute();
-            std::string GetName();
-            std::string GetValue();
+            Attribute(std::string name = "", std::string value = "");
+            template <typename Type> Attribute(std::string name, Type value);
+
             bool operator==(std::string);
             bool operator!=(std::string);
-        //Process Methods
-        public:
+
+            std::string GetName();
+            std::string GetValue();
+
+            ~Attribute();
     };
 
 	/// Template constructor.
-	/** @param Name The Name member of the attribute.
-        @param Value The Value member of the attribute, automatically converted to a C++ string. */
+	/** @param name The name of the attribute.
+        @param value The value of the attribute, converted to a C++ string using std::ostringstream. */
     template <typename Type>
-    Attribute::Attribute(std::string Name, Type Value) {
-        this->Name = Name;
+    Attribute::Attribute(std::string name, Type value) {
+        this->name = name;
 
-        std::ostringstream Stream;
-        Stream << Value;
-        this->Value = Stream.str();
+        std::ostringstream stream;
+        stream << value;
+        this->value = stream.str();
     }
 }
 

@@ -4,7 +4,7 @@
 
 #include "Attribute.h"
 #include <vector>
-namespace antXml {
+namespace antxml {
 	/// Namespace used to enumerate different Tag types.
     namespace Trigger {
         const int Close         = 0;                            //!< A closing tag, e.g. `</Tag>.`

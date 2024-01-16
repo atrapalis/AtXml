@@ -4,7 +4,7 @@
 
 #include "Tag.h"
 /// Contains all class and function implementations of the project.
-namespace antXml {
+namespace antxml {
 	/// Class used to parse, implement, and output XML files.
 	/** The XML file is implemented as a list of tags which can be accessed using public methods. */
     class File {

@@ -2,7 +2,7 @@
 #include "Tag.h"
 #include <sstream>
 
-namespace antXml {
+namespace antxml {
     /// Adds specified Attribute to the list of attributes.
     void Tag::AddAttribute(Attribute Attribute) {
         Attributes.push_back(Attribute);

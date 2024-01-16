@@ -1,19 +1,23 @@
 //Functions.cpp
 #include "Functions.h"
 
-namespace antXml {
-    /// Returns the minimum value from an array of integers.
-	/** @param Integers The array of integers.
-        @param Size The size of the array. */
-    int FindMinimum(int Integers[], int Size) {
-        int r = 0;
+namespace antxml {
+    /// Returns the index of the minimum value from an array of integers.
+	/** @param integers The array of integers.
+        @param size The size of the array. */
+    int FindMinimum(int integers[], int size) {
+        if (size < 1)
+            return -1;
+        
+        int index = 0;
+        int minimum = integers[0];
 
-        for (int i=0; i<Size; i++) {
-            if (Integers[r] < 0) {
-                if (Integers[i] > -1) r = i;
-            } else if (Integers[i] > 0 && Integers[i] < Integers[r]) r = i;
-        }
+        for (int i = 0; i < size; i++)
+            if (integers[i] < minimum) {
+                minimum = integers[i];
+                index = i;
+            }
 
-        return r;
+        return index;
     }
 }

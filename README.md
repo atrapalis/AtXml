@@ -1,4 +1,4 @@
-# antXml 
+# antxml 
 
 An XML parser written in C++.
 
@@ -8,7 +8,7 @@ This library is no longer in development but was used to parse and interpret dat
 To compile the source code, it is recommended to use the Code::Blocks project included in this repository. This library has only been tested in Windows environments. 
 
 ## Documentation
-Documentation can be found in the [GitHub pages](https://atrapalis.github.io/antXml/) for this project.
+Documentation can be found in the [GitHub pages](https://atrapalis.github.io/antxml/) for this project.
 
 ## Example Usage
 
@@ -28,7 +28,7 @@ In this example, this library is used to initialise a set of settings from an XM
 
 *Main.cpp*
 ```
-#include <AntXml/AntXml.h>
+#include <antxml/antxml.h>
 #include <iostream>
 using namespace std;
 
@@ -41,28 +41,28 @@ int main() {
     int Speed = 0;
 
     //Initialize a file
-    AntXml::File File;
+    antxml::File File;
     string Location = "Settings.xml";
 
     //File parser returns 0 on failure, 1 on success.
     if (File.Parse(Location, "Settings")) {
         //Tag loop
         while (File.HasTags()) {
-            AntXml::Tag &Tag = File.GetTag();
+            antxml::Tag &Tag = File.GetTag();
             const string &Name = Tag.GetName();
             const int &Trigger = Tag.GetTrigger();
             const string &Text = Tag.GetText();
 
             //Tag Handler
-            if (Name == "Fullscreen" && Trigger == AntXml::Trigger::OpenClose) {
+            if (Name == "Fullscreen" && Trigger == antxml::Trigger::OpenClose) {
                 Fullscreen = true;
-            } else if (Name == "BitsPerPixel" && Trigger == AntXml::Trigger::Open) {
-                BitsPerPixel = AntXml::String2<int>(Text);
-            } else if (Name == "Resolution" && Trigger == AntXml::Trigger::Open) {
-                Width = AntXml::String2<int>(Text, 'x');
-                Height = AntXml::String2<int>(Text, 'x', AntXml::Trigger::Open);
-            } else if (Name == "GameSpeed" && Trigger == AntXml::Trigger::Open) {
-                Speed = AntXml::String2<int>(Text);
+            } else if (Name == "BitsPerPixel" && Trigger == antxml::Trigger::Open) {
+                BitsPerPixel = antxml::String2<int>(Text);
+            } else if (Name == "Resolution" && Trigger == antxml::Trigger::Open) {
+                Width = antxml::String2<int>(Text, 'x');
+                Height = antxml::String2<int>(Text, 'x', antxml::Trigger::Open);
+            } else if (Name == "GameSpeed" && Trigger == antxml::Trigger::Open) {
+                Speed = antxml::String2<int>(Text);
             }
         }
 
