@@ -8,25 +8,28 @@ namespace antxml {
 	/// Class used to parse, implement, and output XML files.
 	/** The XML file is implemented as a list of tags which can be accessed using public methods. */
     class File {
-        //Attributes
+        // Fields
         protected:
-            Tag Declaration; 			                                    //!< XML declaration tag of the file.
-            std::vector<Tag> Tags; 		                                    //!< List of Tags contained in the file.
-            int CurrentTag; 			                                    //!< Index of attribute returned by GetTag() method.
-        //Access Methods
+            Tag declaration; 			                                    //!< XML declaration tag of the file.
+            std::vector<Tag> tags; 		                                    //!< List of Tags contained in the file.
+            int currentTagIndex; 			                                //!< Index of attribute returned by GetTag() method.
+
+        //Methods
         public:
-            File(std::string Location = "", std::string Root = "");
+            File(std::string location = "", std::string root = "");
             ~File();
-            void Clear();
+
+            // Access
             Tag GetTag();
             bool HasTags();
+
+            // Process
+            void AddTag(Tag tag);
+            void Build(std::string targetLocation = "");
+            void Clear();
+            int Parse(std::string location, std::string root = "");
             void Reset();
-        //Process Methods
-        public:
-            void AddTag(Tag Tag);
-            void Build(std::string TargetLocation = "");
-            int Parse(std::string Location, std::string Root = "");
-            void SetDeclaration(Tag Tag);
+            void SetDeclaration(Tag tag);
     };
 }
 

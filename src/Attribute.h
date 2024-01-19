@@ -18,14 +18,16 @@ namespace antxml {
         public:
             Attribute(std::string name = "", std::string value = "");
             template <typename Type> Attribute(std::string name, Type value);
+            ~Attribute();
 
+            // Operators
             bool operator==(std::string);
             bool operator!=(std::string);
 
+            // Access
             std::string GetName();
             std::string GetValue();
 
-            ~Attribute();
     };
 
 	/// Template constructor.

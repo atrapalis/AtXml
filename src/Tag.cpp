@@ -3,78 +3,84 @@
 #include <sstream>
 
 namespace antxml {
+    /// Constructor with optional parameters.
+	/** @param name Initialises the Name member of the tag.
+        @param trigger Initialises the type of the tag. */
+    Tag::Tag(std::string name, Trigger trigger) {
+        this->name = name;
+        this->trigger = trigger;
+        text = "";
+        currentAttributeIndex = 0;
+    }
+
+    /// operator== implementation.
+    /** Compares the Name member to the string value. */
+    bool Tag::operator==(std::string stringValue) {
+        return name == stringValue;
+    }
+
+    /// operator!= implementation.
+    /** Compares the Name member to the string value. */
+    bool Tag::operator!=(std::string stringValue) {
+        return name != stringValue;
+    }
+
     /// Adds specified Attribute to the list of attributes.
-    void Tag::AddAttribute(Attribute Attribute) {
-        Attributes.push_back(Attribute);
+    void Tag::AddAttribute(Attribute attribute) {
+        attributes.push_back(attribute);
     }
 
     /// Increments index `CurrentAttribute` by 1.
     void Tag::BrowseAttributes() {
-        CurrentAttribute+=1;
-        if (CurrentAttribute >= (signed)Attributes.size()) CurrentAttribute = -1;
-    }
-
-    /// Constructor with optional parameters.
-	/** @param Name Initialises the Name member of the tag.
-        @param Trigger Initialises the type of the tag. */
-    Tag::Tag(std::string Name, int Trigger) {
-        this->Name = Name;
-        this->Trigger = Trigger;
-        Text = "";
-        CurrentAttribute = 0;
+        currentAttributeIndex += 1;
+        if (currentAttributeIndex >= (signed)attributes.size())
+            currentAttributeIndex = -1;
     }
 
     /// Returns the next attribute from the list and increments index `CurrentAttribute`.
-    Attribute Tag::GetAttribute() {
-        Attribute Attribute = Attributes[CurrentAttribute];
+    Attribute Tag::FetchAttribute() {
+        Attribute attribute = attributes[currentAttributeIndex];
         BrowseAttributes();
-        return Attribute;
+        return attribute;
     }
 
     /// Returns the Name member.
     std::string Tag::GetName() {
-        return Name;
+        return name;
     }
 
     /// Returns the Text member.
     std::string Tag::GetText() {
-        return Text;
+        return text;
     }
 
     /// Returns the Trigger member.
-    int& Tag::GetTrigger() {
-        return Trigger;
+    Trigger Tag::GetTrigger() {
+        return trigger;
     }
 
     /// Used to check whether the end of the Attributes list has been reached.
     /** Determined by the value of the index `CurrentAttribute`. */
     bool Tag::HasAttributes() {
         bool HasAttributes = false;
-        if ((signed)Attributes.size() > 0 && CurrentAttribute >= 0) HasAttributes = true; else ResetAttributes();
+
+        if (attributes.size() > 0U && currentAttributeIndex >= 0)
+            HasAttributes = true;
+        else
+            ResetAttributes();
+
         return HasAttributes;
-    }
-
-    /// operator== implementation.
-    /** Compares the Name member to the string value. */
-    bool Tag::operator==(std::string String) {
-        if (Name == String) return true; else return false;
-    }
-
-    /// operator!= implementation.
-    /** Compares the Name member to the string value. */
-    bool Tag::operator!=(std::string String) {
-        if (Name != String) return true; else return false;
     }
 
     /// Resets index `CurrentAttribute` to 0.
     void Tag::ResetAttributes() {
-        CurrentAttribute = 0;
+        currentAttributeIndex = 0;
     }
 
     /// Basic destructor.
     Tag::~Tag() {
-        Name = Text = "";
-        Trigger = -1;
-        CurrentAttribute = 0;
+        name = text = "";
+        trigger = TRIGGER_INVALID;
+        currentAttributeIndex = 0;
     }
 }
